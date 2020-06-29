@@ -4,11 +4,11 @@ services:
   web:
     build: .
     command: gunicorn --bind 0.0.0.0:5000 blog:create_app()
-    expose:
-      - 5000
+    ports:
+      - "5000:5000"
     environment:
       - FLASK_APP=blog
-      - FLASK_ENV=development
+      - FLASK_ENV=production
       - SQLALCHEMY_DATABASE_URI=postgresql://flask:flask123@db/flask
       - SECRET_KEY="dev"
       - SQL_HOST=db

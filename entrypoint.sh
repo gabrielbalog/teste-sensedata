@@ -11,6 +11,4 @@ then
     echo "PostgreSQL started"
 fi
 
-flask init-db
-
 exec "$@"

@@ -27,7 +27,6 @@ def init_db_command():
     """Clear the existing data and create new tables."""
     from blog.models import Person, Film, Planet, Starship, Vehicle
 
-    drop_db()
     init_db()
     click.echo("Initialized the database.")
 

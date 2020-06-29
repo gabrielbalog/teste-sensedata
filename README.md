@@ -70,6 +70,24 @@ It'll automatically create the database and add the tables and data.
 
 There is a Dockerfile within the project if there is a need and desire to upload the system through the docker. For this it is unnecessary to uncomment the web part of the docker-compose:
 
+```yaml
+web:
+    build: .
+    command: gunicorn --bind 0.0.0.0:5000 blog:create_app()
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_APP=blog
+      - FLASK_ENV=production
+      - SQLALCHEMY_DATABASE_URI=postgresql://flask:flask123@db/flask
+      - SECRET_KEY="dev"
+      - SQL_HOST=db
+      - SQL_PORT=5432
+      - DATABASE=postgres
+    depends_on:
+      - db
+```
+
 That done, just go up the docker-compose normally.
 
 ## Choices made for this project

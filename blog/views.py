@@ -55,6 +55,4 @@ def people():
 @bp.route("/starships")
 def starship():
     starships = Starship.query.order_by(Starship.score.desc())
-    print(starships[0].score)
-
     return render_template("starship.html", starships=starships)
