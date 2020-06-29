@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>People</title>
+{% endblock head %}
+
+{% block content %}
+<div class="m-3">
+    <h1>People</h1>
+    <form class="form-inline">
+        <label for="order">Order By:</label>
+        <select name="order" id="order" class="form-control">
+            <option value="" selected>Please choose</option>
+            <option value="name" {% if args.get("order") == "name" %} selected="" {% endif %}>Name</option>
+            <option value="gender" {% if args.get("order") == "gender" %} selected="" {% endif %}>Gender</option>
+            <option value="mass" {% if args.get("order") == "mass" %} selected="" {% endif %}>Mass</option>
+            <option value="height" {% if args.get("order") == "height" %} selected="" {% endif %}>Height</option>
+        </select>
+        <label for="film">Films:</label>
+        <select name="film" id="film" class="form-control">
+            <option value="" selected>Please choose</option>
+            {% for f in films %}
+            <option value="{{ f.id }}" {% if args.get("film")|int == f.id %} selected="" {% endif %}>{{ f.title }}
+            </option>
+            {% endfor %}
+        </select>
+
+        <label for="starship">Starships:</label>
+        <select name="starship" id="starship" class="form-control">
+            <option value="" selected>Please choose</option>
+            {% for s in starships %}
+            <option value="{{ s.id }}" {% if args.get("starship")|int == s.id %} selected="" {% endif %}>{{ s.name }}
+            </option>
+            {% endfor %}
+        </select>
+
+        <label for="vehicle">Vehicles:</label>
+        <select name="vehicle" id="vehicle" class="form-control">
+            <option value="" selected>Please choose</option>
+            {% for v in vehicles %}
+            <option value="{{ v.id }}" {% if args.get("vehicle")|int == v.id %} selected="" {% endif %}>{{ v.name }}
+            </option>
+            {% endfor %}
+        </select>
+
+        <label for="planet">Planets:</label>
+        <select name="planet" id="planet" class="form-control">
+            <option value="" selected>Please choose</option>
+            {% for p in planets %}
+            <option value="{{ p.id }}" {% if args.get("planet")|int == p.id %} selected="" {% endif %}>{{ p.name }}
+            </option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-primary mb-2">Filter</button>
+    </form>
+
+    {% if people.total %}
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>Birth Year</th>
+                <th>Eye Color</th>
+                <th>Gender</th>
+                <th>Hair Color</th>
+                <th>Heigth</th>
+                <th>Mass</th>
+                <th>Skin Color</th>
+                <th>Homeworld</th>
+                <th>Films</th>
+                <th>Starships</th>
+                <th>Vehicles</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in people.items %}
+            <tr>
+                <td>{{ p.name }}</td>
+                <td>{{ p.birth_year }}</td>
+                <td>{{ p.eye_color }}</td>
+                <td>{{ p.gender }}</td>
+                <td>{{ p.hair_color }}</td>
+                <td>{{ p.height }}</td>
+                <td>{{ p.mass }}</td>
+                <td>{{ p.skin_color }}</td>
+                <td>{{ p.homeworld.name }}</td>
+                <td>{{ p.films|join(',') }}</td>
+                <td>{{ p.starships|join(',') }}</td>
+                <td>{{ p.vehicles|join(',') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <h3>There's not data for such filter</h3>
+    {% endif %}
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {% if people.has_prev %}
+            <li class="page-item"><a class="page-link" href="{{ url_for('website.people', page=1) }}">First</a></li>
+            <li class="page-item"><a class="page-link"
+                    href="{{ url_for('website.people', page=people.prev_num) }}">Previous</a></li>
+            {% endif %}
+            <li class="page-item active"><a class="page-link"
+                    href="{{ url_for('website.people', page=people.page) }}">{{ people.page }}</a></li>
+            {% if people.has_next %}
+            <li class="page-item"><a class="page-link"
+                    href="{{ url_for('website.people', page=people.next_num) }}">Next</a></li>
+            <li class="page-item"><a class="page-link"
+                    href="{{ url_for('website.people', page=people.pages) }}">Last</a>
+            </li>
+            {% endif %}
+
+        </ul>
+    </nav>
+</div>
+{% endblock content %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Starships</title>
+{% endblock head %}
+
+{% block content %}
+<div class="m-3">
+    <h1>Starships</h1>
+
+    {% if starships %}
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>Model</th>
+                <th>Score</th>
+                <th>Starship Class</th>
+                <th>Manufacturer</th>
+                <th>Cost In Credits</th>
+                <th>Length</th>
+                <th>Crew</th>
+                <th>Passengers</th>
+                <th>Max Atmosphering Speed</th>
+                <th>Hyperdrive Rating</th>
+                <th>MGLT</th>
+                <th>Cargo Capacity</th>
+                <th>Consumables</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in starships %}
+            <tr>
+                <td>{{ s.name }}</td>
+                <td>{{ s.model }}</td>
+                <td>{{ s.score }}</td>
+                <td>{{ s.starship_class }}</td>
+                <td>{{ s.manufacturer }}</td>
+                <td>{{ s.cost_in_credits }}</td>
+                <td>{{ s.length }}</td>
+                <td>{{ s.crew }}</td>
+                <td>{{ s.passengers }}</td>
+                <td>{{ s.max_atmosphering_speed }}</td>
+                <td>{{ s.hyperdrive_rating }}</td>
+                <td>{{ s.mglt }}</td>
+                <td>{{ s.cargo_capacity }}</td>
+                <td>{{ s.consumables }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</div>
+{% endblock content %}

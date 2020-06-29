@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="m-5">
+
+    <h1>Test - Flask swapi.dev</h1>
+    <hr>
+    <p>The test must follow the rules:</p>
+    <ol>
+        <li>
+            Primeira página: Uma tabela com os dados dos personagens do Start Wars com as seguintes features:
+            <ul>
+                <li>
+                    Suportar paginação de 10 em 10 registros.
+                </li>
+                <li>Ordenação por Nome, Gênero, Peso e Altura dos personagens.</li>
+                <li>Opcao em tela para filtrar po Film, Startship, Vehicles e Planets</li>
+            </ul>
+        </li>
+        <li>
+            Segunda página: Tabela com dados das startships disponíveis: Uma página contendo uma tabela com o score de
+            cada uma das starships fornecidas.
+            <ul>
+                <li>Esse score deverá ser composto pelo hyperdrive_rating dividido pelo cost_in_credits da nave.</li>
+                <li>Exibir as naves numa tabela ordenada em ordem decrescente da melhor nave para a pior.</li>
+            </ul>
+        </li>
+    </ol>
+</div>
+{% endblock content %}
